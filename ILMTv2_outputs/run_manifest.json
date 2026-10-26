@@ -1,0 +1,20 @@
+{
+  "notebook": "ILMTv2_RSO.ipynb",
+  "purpose": "research prototype; not yet a validated final detector",
+  "data_dir": "ILMT_Contest_Materials/test_files",
+  "n_fits_found": 85,
+  "methods": [
+    "FITS audit",
+    "robust coarse background",
+    "LoG-Hough baseline",
+    "intensity Radon candidates",
+    "known-location matched-filter injection"
+  ],
+  "important_limitations": [
+    "no expert-labelled coordinates for the contest frames in this notebook",
+    "Radon peak score is not calibrated statistical significance",
+    "synthetic streak model is simplified",
+    "no calibrated gain/read-noise model assumed",
+    "candidate visualization geometry must be verified with synthetic lines"
+  ]
+}

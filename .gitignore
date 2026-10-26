@@ -1,3 +1,2 @@
-.venv/
-venv/
-test_files/
+ILMT_env/
+ILMT_Contest_Materials/
