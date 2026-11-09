@@ -1,0 +1,46 @@
+{
+  "frame_filename": "20221026-0057.fits",
+  "frame_path": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/ILMT_Contest_Materials/test_files/20221026-0057.fits",
+  "sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "date_obs": "2022-10-26",
+  "shape": [
+    4096,
+    4096
+  ],
+  "dtype": "float32",
+  "median": 1.9607568979263306,
+  "robust_global_sigma": 40.93205510880947,
+  "finite_fraction": 1.0,
+  "edge_region_path": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/annotation/ds9_edges_image.reg",
+  "edge_region_coordinate_system": "DS9 IMAGE",
+  "edge_lengths_px": [
+    4552.850199050125,
+    4552.849330654971
+  ],
+  "annotation_width_endpoints_px": [
+    8.595276438636288,
+    8.594356462819047
+  ],
+  "annotation_mask_pixels": 39125,
+  "point_source_mask_pixels": 340315,
+  "point_source_mask_fraction": 0.02028435468673706,
+  "annotated_corridor_masked_fraction": 0.0014057507987220448,
+  "background_mesh_options": [
+    32,
+    64,
+    128
+  ],
+  "selected_background_mesh": 64,
+  "background_rms_median": 17.58021354675293,
+  "variance_model": "empirical local background RMS squared; not calibrated total detector variance",
+  "psf_fits_attempted": 200,
+  "psf_fits_successful": 200,
+  "psf_fits_accepted": 192,
+  "psf_sigma_median_px": 3.2912910531342403,
+  "psf_fwhm_equivalent_px": 7.750398145849669,
+  "python_version": "3.13.13",
+  "numpy_version": "2.5.2",
+  "astropy_version": "8.0.1",
+  "sep_version": "1.4.1",
+  "scipy_version": "1.18.1"
+}

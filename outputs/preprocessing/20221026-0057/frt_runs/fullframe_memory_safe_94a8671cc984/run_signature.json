@@ -1,0 +1,32 @@
+{
+  "frame": "20221026-0057.fits",
+  "sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "pyradon_commit": "6a1a43096b30ba99cdfea5593dc5cad0f35d36a3",
+  "image_shape": [
+    4096,
+    4096
+  ],
+  "image_dtype": "float32",
+  "variance_model": "empirical background RMS squared",
+  "variance_median": 309.0628967285156,
+  "psf_sigma_pix": 3.2912910531342403,
+  "threshold_schedule": [
+    5120.0,
+    2560.0,
+    1280.0,
+    640.0,
+    320.0,
+    160.0,
+    80.0,
+    40.0,
+    20.0,
+    10.0,
+    5.0
+  ],
+  "num_iterations": 5,
+  "min_length_pix": 32,
+  "use_short": true,
+  "use_exclude": false,
+  "use_sections": false,
+  "streak_storage": "compact numeric-only references"
+}
