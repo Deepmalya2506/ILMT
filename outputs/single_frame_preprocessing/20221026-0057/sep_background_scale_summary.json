@@ -1,0 +1,188 @@
+{
+  "frame": "20221026-0057.fits",
+  "fits_sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "method": "SEP spatial background estimation",
+  "mask_used": false,
+  "mesh_sizes": [
+    64,
+    128,
+    256
+  ],
+  "filter_size_mesh_boxes": 3,
+  "rms_repair_method": "nearest_valid_positive_neighbour",
+  "rms_repair_is_measurement": false,
+  "variance_calibration_status": "Not calibrated total detector variance",
+  "models": {
+    "64": {
+      "box_size": 64,
+      "filter_size_mesh_boxes": 3,
+      "global_background": -4.327722072601318,
+      "global_rms": 17.576576232910156,
+      "background_stats": {
+        "min": -37.20448684692383,
+        "p1": -33.21267127990723,
+        "p10": -27.023691177368164,
+        "median": -4.267338275909424,
+        "p90": 153.2621307373047,
+        "p99": 1989.7817382812482,
+        "max": 3281.45068359375
+      },
+      "rms_quality": {
+        "total_pixels": 16777216,
+        "finite_pixels": 16777216,
+        "positive_pixels": 16776468,
+        "zero_pixels": 0,
+        "negative_pixels": 748,
+        "nonfinite_pixels": 0,
+        "invalid_pixels": 748,
+        "invalid_fraction": 4.458427429199219e-05,
+        "median_fill_distance_pixels": 4.0,
+        "maximum_fill_distance_pixels": 9.486832980505138,
+        "repair_method": "nearest_valid_positive_neighbour"
+      },
+      "rms_stats_raw": {
+        "min": 0.000743865966796875,
+        "p1": 16.798921585083008,
+        "p5": 16.98223114013672,
+        "p10": 17.087615966796875,
+        "median": 17.58021354675293,
+        "p90": 22.20392608642578,
+        "p95": 42.661353302001885,
+        "p99": 314.44581756591805,
+        "max": 1748.4771728515625,
+        "positive_pixel_count": 16776468
+      },
+      "rms_stats_used": {
+        "min": 0.000743865966796875,
+        "p1": 16.798500061035156,
+        "p5": 16.982120037078857,
+        "p10": 17.087552070617676,
+        "median": 17.580184936523438,
+        "p90": 22.20363712310791,
+        "p95": 42.65924835205078,
+        "p99": 314.42630462646304,
+        "max": 1748.4771728515625,
+        "positive_pixel_count": 16777216
+      },
+      "target_contrast": 4.329639732837677,
+      "target_positive_fraction": 0.7290294246815986,
+      "target_valid_fraction": 1.0,
+      "control_median_contrast": -0.46637885086238384,
+      "target_minus_control": 4.796018583700061
+    },
+    "128": {
+      "box_size": 128,
+      "filter_size_mesh_boxes": 3,
+      "global_background": -4.783001899719238,
+      "global_rms": 17.841716766357422,
+      "background_stats": {
+        "min": -36.61602020263672,
+        "p1": -32.93181934356689,
+        "p10": -26.56967830657959,
+        "median": -4.286508798599243,
+        "p90": 138.42935943603516,
+        "p99": 1648.0167053222647,
+        "max": 2905.392333984375
+      },
+      "rms_quality": {
+        "total_pixels": 16777216,
+        "finite_pixels": 16777216,
+        "positive_pixels": 16776581,
+        "zero_pixels": 0,
+        "negative_pixels": 635,
+        "nonfinite_pixels": 0,
+        "invalid_pixels": 635,
+        "invalid_fraction": 3.784894943237305e-05,
+        "median_fill_distance_pixels": 3.0,
+        "maximum_fill_distance_pixels": 8.0,
+        "repair_method": "nearest_valid_positive_neighbour"
+      },
+      "rms_stats_raw": {
+        "min": 0.004385948181152344,
+        "p1": 17.02352867126465,
+        "p5": 17.19959259033203,
+        "p10": 17.285655975341797,
+        "median": 17.838668823242188,
+        "p90": 27.039276123046875,
+        "p95": 67.57111358642578,
+        "p99": 400.90081787109295,
+        "max": 795.03369140625,
+        "positive_pixel_count": 16776581
+      },
+      "rms_stats_used": {
+        "min": 0.004385948181152344,
+        "p1": 17.023237228393555,
+        "p5": 17.199520111083984,
+        "p10": 17.285606384277344,
+        "median": 17.838634490966797,
+        "p90": 27.038199424743652,
+        "p95": 67.56762886047363,
+        "p99": 400.89332580566395,
+        "max": 795.03369140625,
+        "positive_pixel_count": 16777216
+      },
+      "target_contrast": 4.394455075263977,
+      "target_positive_fraction": 0.7294685990338164,
+      "target_valid_fraction": 1.0,
+      "control_median_contrast": -0.472037672996521,
+      "target_minus_control": 4.866492748260498
+    },
+    "256": {
+      "box_size": 256,
+      "filter_size_mesh_boxes": 3,
+      "global_background": -3.922269821166992,
+      "global_rms": 17.99606704711914,
+      "background_stats": {
+        "min": -36.81724166870117,
+        "p1": -32.20377731323242,
+        "p10": -26.71601104736328,
+        "median": -3.985003709793091,
+        "p90": 133.07817840576172,
+        "p99": 957.6321899414061,
+        "max": 1098.699462890625
+      },
+      "rms_quality": {
+        "total_pixels": 16777216,
+        "finite_pixels": 16777216,
+        "positive_pixels": 16777216,
+        "zero_pixels": 0,
+        "negative_pixels": 0,
+        "nonfinite_pixels": 0,
+        "invalid_pixels": 0,
+        "invalid_fraction": 0.0,
+        "median_fill_distance_pixels": 0.0,
+        "maximum_fill_distance_pixels": 0.0,
+        "repair_method": "nearest_valid_positive_neighbour"
+      },
+      "rms_stats_raw": {
+        "min": 16.65265464782715,
+        "p1": 17.35147476196289,
+        "p5": 17.464567184448242,
+        "p10": 17.56203269958496,
+        "median": 18.023807525634766,
+        "p90": 34.182430267333984,
+        "p95": 108.0947437286377,
+        "p99": 366.0671630859363,
+        "max": 459.0315856933594,
+        "positive_pixel_count": 16777216
+      },
+      "rms_stats_used": {
+        "min": 16.65265464782715,
+        "p1": 17.35147476196289,
+        "p5": 17.464567184448242,
+        "p10": 17.56203269958496,
+        "median": 18.023807525634766,
+        "p90": 34.182430267333984,
+        "p95": 108.0947437286377,
+        "p99": 366.0671630859363,
+        "max": 459.0315856933594,
+        "positive_pixel_count": 16777216
+      },
+      "target_contrast": 4.349451094865799,
+      "target_positive_fraction": 0.7281510759771629,
+      "target_valid_fraction": 1.0,
+      "control_median_contrast": -0.45072218612767756,
+      "target_minus_control": 4.8001732809934765
+    }
+  }
+}

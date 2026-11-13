@@ -1,0 +1,35 @@
+{
+  "frame": "20221026-0057.fits",
+  "fits_sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "reference_fwhm_arcsec": 2.5201002281347624,
+  "reference_pixel_scale_arcsec": 0.3276,
+  "reference_fwhm_pixels": 7.6926136389950015,
+  "reference_sigma_pixels": 3.266752232438637,
+  "cutout_size_pixels": 41,
+  "selection_criteria": {
+    "moment_a": [
+      2.0,
+      5.0
+    ],
+    "moment_b": [
+      2.0,
+      4.8
+    ],
+    "maximum_moment_ratio": 1.5,
+    "source_area": [
+      20,
+      1500
+    ],
+    "raw_peak_range": [
+      1500.0,
+      25000.0
+    ],
+    "nearest_source_distance_px": 35.0,
+    "manual_target_buffer_px": 60.0,
+    "artifact_dilation_radius_px": 22
+  },
+  "total_detections": 1412,
+  "final_candidate_count": 128,
+  "candidate_audit_count": 130,
+  "selection_stage": "Candidate screening only; no PSF fitting performed"
+}

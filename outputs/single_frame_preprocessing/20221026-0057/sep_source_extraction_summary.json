@@ -1,0 +1,18 @@
+{
+  "frame": "20221026-0057.fits",
+  "fits_sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "background_mesh_px": 128,
+  "threshold_relative_to_empirical_local_rms": 5.0,
+  "minimum_area_px": 5,
+  "filter_type": "matched",
+  "deblend_nthresh": 32,
+  "deblend_cont": 0.005,
+  "clean": true,
+  "invalid_rms_mask_pixels": 635,
+  "repeated_value_mask_applied": false,
+  "source_count": 1412,
+  "segmented_pixels": 753401,
+  "target_corridor_intersecting_objects": 12,
+  "flux_unit": "Uncalibrated image units; FITS BUNIT missing",
+  "variance_status": "Empirical local SEP background RMS; not calibrated total variance"
+}

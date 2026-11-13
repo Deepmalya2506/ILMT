@@ -1,0 +1,217 @@
+{
+  "frame": "20221026-0057.fits",
+  "horizontal_candidate": {
+    "object_id": 120,
+    "width_median_px": 6.399999999999977,
+    "width_robust_spread_px": 1.3343419966499663,
+    "width_screen_threshold_px": 13.071709983249809,
+    "broadened_intervals": [
+      {
+        "start": 2422,
+        "end": 2422,
+        "number_of_bins": 1
+      },
+      {
+        "start": 2424,
+        "end": 2485,
+        "number_of_bins": 62
+      }
+    ],
+    "full_interval_summary": {
+      "number_of_positions": 1534,
+      "fraction_retained": 1.0,
+      "target_median": 62.33733654022217,
+      "target_p10": 48.321318531036376,
+      "target_p90": 76.49262866973876,
+      "control_reference_median": -1.0177183151245117,
+      "paired_difference_median": 63.412964820861816,
+      "paired_difference_p10": 47.42943153381348,
+      "paired_difference_p90": 80.02402377128601,
+      "fraction_target_above_control": 1.0,
+      "fraction_positive_target": 1.0
+    },
+    "width_screened_summary": {
+      "number_of_positions": 1471,
+      "fraction_retained": 0.9589308996088657,
+      "target_median": 61.858402252197266,
+      "target_p10": 48.05951118469238,
+      "target_p90": 74.48505878448486,
+      "control_reference_median": -0.8986530303955078,
+      "paired_difference_median": 63.07271385192871,
+      "paired_difference_p10": 47.255465030670166,
+      "paired_difference_p90": 77.30976486206055,
+      "fraction_target_above_control": 1.0,
+      "fraction_positive_target": 1.0
+    },
+    "block_records": [
+      {
+        "x_start": 1279,
+        "x_end": 1407,
+        "valid_samples": 128,
+        "target_median": 59.97971725463867,
+        "control_median": -2.5146188735961914,
+        "target_minus_control": 61.51841354370117,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 1407,
+        "x_end": 1535,
+        "valid_samples": 128,
+        "target_median": 64.68394470214844,
+        "control_median": -0.4173583984375,
+        "target_minus_control": 65.14262008666992,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 1535,
+        "x_end": 1663,
+        "valid_samples": 128,
+        "target_median": 63.38288974761963,
+        "control_median": -0.20298051834106445,
+        "target_minus_control": 64.02704811096191,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 1663,
+        "x_end": 1791,
+        "valid_samples": 128,
+        "target_median": 63.02914237976074,
+        "control_median": -1.0236873626708984,
+        "target_minus_control": 64.45658445358276,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 1791,
+        "x_end": 1919,
+        "valid_samples": 128,
+        "target_median": 61.37775707244873,
+        "control_median": -0.5468041896820068,
+        "target_minus_control": 62.58337688446045,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 1919,
+        "x_end": 2047,
+        "valid_samples": 128,
+        "target_median": 58.95195245742798,
+        "control_median": -1.1625194549560547,
+        "target_minus_control": 59.52867317199707,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 2047,
+        "x_end": 2175,
+        "valid_samples": 128,
+        "target_median": 62.888373494148254,
+        "control_median": -0.8694443702697754,
+        "target_minus_control": 62.75581097602844,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 2175,
+        "x_end": 2303,
+        "valid_samples": 128,
+        "target_median": 62.377607345581055,
+        "control_median": -0.5020880103111267,
+        "target_minus_control": 63.061652302742004,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 2303,
+        "x_end": 2431,
+        "valid_samples": 120,
+        "target_median": 60.39578628540039,
+        "control_median": -0.7744581699371338,
+        "target_minus_control": 63.13216304779053,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 2431,
+        "x_end": 2559,
+        "valid_samples": 73,
+        "target_median": 60.06198024749756,
+        "control_median": -2.008894920349121,
+        "target_minus_control": 64.18270635604858,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 2559,
+        "x_end": 2687,
+        "valid_samples": 128,
+        "target_median": 64.04606461524963,
+        "control_median": -0.8547347784042358,
+        "target_minus_control": 64.31449460983276,
+        "positive_difference_fraction": 1.0
+      },
+      {
+        "x_start": 2687,
+        "x_end": 2813,
+        "valid_samples": 126,
+        "target_median": 59.8199782371521,
+        "control_median": -0.875664472579956,
+        "target_minus_control": 61.24245232343674,
+        "positive_difference_fraction": 1.0
+      }
+    ],
+    "interpretation": "Unresolved horizontal linear candidate; width-screened comparison is diagnostic only."
+  },
+  "source_A_vertical_family": {
+    "object_ids": [
+      925,
+      926,
+      927,
+      928
+    ],
+    "total_component_pixels": 33061,
+    "repeated_value_pixels": 23066,
+    "repeated_fraction": 0.6976800459756208,
+    "high_repeat_intervals": [
+      {
+        "start": 595,
+        "end": 1762,
+        "number_of_bins": 1168
+      },
+      {
+        "start": 1809,
+        "end": 2347,
+        "number_of_bins": 539
+      },
+      {
+        "start": 2384,
+        "end": 2509,
+        "number_of_bins": 126
+      },
+      {
+        "start": 2524,
+        "end": 2809,
+        "number_of_bins": 286
+      },
+      {
+        "start": 2821,
+        "end": 2822,
+        "number_of_bins": 2
+      },
+      {
+        "start": 2824,
+        "end": 2852,
+        "number_of_bins": 29
+      },
+      {
+        "start": 2854,
+        "end": 2873,
+        "number_of_bins": 20
+      },
+      {
+        "start": 2876,
+        "end": 2897,
+        "number_of_bins": 22
+      },
+      {
+        "start": 2911,
+        "end": 2913,
+        "number_of_bins": 3
+      }
+    ],
+    "interpretation": "Strong repeated-value/source-associated data artefact candidate; physical origin remains unconfirmed."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "frame": "20221026-0057.fits",
+  "fits_sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "candidate_count": 128,
+  "registered_star_count": 128,
+  "cutout_size_px": 41,
+  "subpixel_registration": true,
+  "registration_method": "SEP barycenter plus residual positive-weight centroid correction",
+  "local_background_method": "Median in outer annulus",
+  "stacking_method": "Pixel-wise median",
+  "header_reference_fwhm_px": 7.6926136389950015,
+  "empirical_radial_fwhm_px": 8.416157605375687,
+  "empirical_x_fwhm_px": 8.37614122359002,
+  "empirical_y_fwhm_px": 8.23500421068733,
+  "individual_moment_fwhm_major_median": 8.032787561935514,
+  "individual_moment_fwhm_minor_median": 7.615137334991648,
+  "individual_moment_ellipticity_median": 0.050783182378676184,
+  "potential_moment_outliers": 0,
+  "quadrant_counts": {
+    "LL": 40,
+    "UR": 36,
+    "LR": 26,
+    "UL": 26
+  },
+  "fit_status": "Empirical PSF stack completed; analytical fitting not yet performed"
+}
