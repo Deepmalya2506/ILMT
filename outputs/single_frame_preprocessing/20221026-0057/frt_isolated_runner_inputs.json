@@ -1,0 +1,29 @@
+{
+  "frame": "20221026-0057.fits",
+  "image_path": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/outputs/single_frame_preprocessing/20221026-0057/frt_full_length_empirical_psf_v2/initial_psf_filtered_image.npy",
+  "image_shape": [
+    4096,
+    4096
+  ],
+  "image_dtype": "float32",
+  "variance_path": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/outputs/single_frame_preprocessing/20221026-0057/frt_empirical_variance_proxy.npy",
+  "variance_shape": [
+    4096,
+    4096
+  ],
+  "variance_dtype": "float32",
+  "variance_source": "finder.data.get_var_image((0,0), image.shape), checked against frt_variance_input",
+  "psf_path": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/outputs/single_frame_preprocessing/20221026-0057/frt_empirical_psf_kernel.npy",
+  "psf_shape": [
+    41,
+    41
+  ],
+  "psf_sum": 1.0,
+  "var_scalar": 303.41033935546875,
+  "input_sha256": "f1217a8434f5347f0a80d91cdf0974a57c0bd3ea0bce638821ecd3851ed8ebe9",
+  "pyradon_repo": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/pyradon_reference",
+  "pyradon_commit": "6a1a43096b30ba99cdfea5593dc5cad0f35d36a3",
+  "python_executable": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/ILMT_env/bin/python",
+  "finder_psf_already_applied_to_image": true,
+  "export_only_no_frt": true
+}

@@ -1,0 +1,57 @@
+{
+  "signature": {
+    "frame": "20221026-0057.fits",
+    "stage82_initial_image": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/outputs/single_frame_preprocessing/20221026-0057/frt_full_length_empirical_psf_v2/initial_psf_filtered_image.npy",
+    "stage82_initial_image_bytes": 67108992,
+    "stage81_input_sha256": "f1217a8434f5347f0a80d91cdf0974a57c0bd3ea0bce638821ecd3851ed8ebe9",
+    "pyradon_commit": "6a1a43096b30ba99cdfea5593dc5cad0f35d36a3",
+    "pyradon_source_sha256": "50b99514919af74ad84d76c1808009feeb2092a420791b7a51e7fd97b3fe653e",
+    "psf_sha256": "1c86496e055ca671a4b4eb2d854709b3947ab5b3c083848bcd73315383d5b27e",
+    "image_shape": [
+      4096,
+      4096
+    ],
+    "image_dtype": "float32",
+    "variance_shape": [
+      4096,
+      4096
+    ],
+    "variance_scalar": 303.41033935546875,
+    "minimum_radon_snr": 7.5,
+    "thresholds": [
+      30720.0,
+      15360.0,
+      7680.0,
+      3840.0,
+      1920.0,
+      960.0,
+      480.0,
+      240.0,
+      120.0,
+      60.0,
+      30.0,
+      15.0,
+      7.5
+    ],
+    "num_iterations_per_orientation": 3,
+    "orientations": [
+      false,
+      true
+    ],
+    "full_length_mode": true,
+    "sectioning": false,
+    "use_subtract_mean": true,
+    "use_conv": true,
+    "clipping_convention": "pinned PyRaDoN: clip mask uses per-pixel variance; replacement uses t/2*sqrt(var_scalar)",
+    "orchestration": "checkpointed equivalent of scan_thresholds + find_multi; per-call cache/object cleanup"
+  },
+  "next_threshold_index": 4,
+  "clipped_for_level": true,
+  "orientation_index": 0,
+  "iteration_index": 0,
+  "candidates": [],
+  "frt_calls": 8,
+  "complete": false,
+  "started_unix": 1794725631.2866514,
+  "current_threshold": 1920.0
+}

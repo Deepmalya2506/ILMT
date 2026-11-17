@@ -1,0 +1,1 @@
+candidate_id,threshold_index,threshold_snr,orientation_transpose,iteration_in_orientation,x1_px,y1_px,x2_px,y2_px,length_px,image_angle_deg,pyradon_snr,pyradon_snr_fwhm,pyradon_angle_deg,intensity_per_length,streak_length_px

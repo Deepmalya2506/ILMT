@@ -1,0 +1,42 @@
+{
+  "frame": "20221026-0057.fits",
+  "input_sha256": "f1217a8434f5347f0a80d91cdf0974a57c0bd3ea0bce638821ecd3851ed8ebe9",
+  "pyradon_commit": "6a1a43096b30ba99cdfea5593dc5cad0f35d36a3",
+  "pyradon_source_sha256": "50b99514919af74ad84d76c1808009feeb2092a420791b7a51e7fd97b3fe653e",
+  "pyradon_long_mode_patch": "AST-verified in-memory long-mode patch: PSF scalar call; 2-D geometric factor; NaN-safe argmax and empty-map guard",
+  "image_shape": [
+    4096,
+    4096
+  ],
+  "psf_shape": [
+    41,
+    41
+  ],
+  "psf_sha256": "1c86496e055ca671a4b4eb2d854709b3947ab5b3c083848bcd73315383d5b27e",
+  "source_mode": "unmasked_source_preserving_residual",
+  "minimum_threshold": 5.0,
+  "thresholds": [
+    40960.0,
+    20480.0,
+    10240.0,
+    5120.0,
+    2560.0,
+    1280.0,
+    640.0,
+    320.0,
+    160.0,
+    80.0,
+    40.0,
+    20.0,
+    10.0,
+    5.0
+  ],
+  "num_iterations_per_threshold": 3,
+  "minimum_length_px": 32,
+  "use_short": false,
+  "use_sections": false,
+  "use_exclude": false,
+  "use_subtract_mean": true,
+  "use_conv": true,
+  "variance_model": "empirical SEP local RMS squared; not calibrated total detector variance"
+}

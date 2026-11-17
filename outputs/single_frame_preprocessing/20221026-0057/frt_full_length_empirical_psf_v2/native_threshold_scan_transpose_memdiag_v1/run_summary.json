@@ -1,0 +1,44 @@
+{
+  "frame": "20221026-0057.fits",
+  "complete": true,
+  "thresholds": [
+    30720.0,
+    15360.0,
+    7680.0,
+    3840.0,
+    1920.0,
+    960.0,
+    480.0,
+    240.0,
+    120.0,
+    60.0,
+    30.0,
+    15.0,
+    7.5
+  ],
+  "minimum_radon_snr": 7.5,
+  "clip_mode": "pyradon_scalar",
+  "variance_mask_update_after_streak_removal": true,
+  "iterations_per_orientation": 3,
+  "frt_calls": 59,
+  "candidate_count": 46,
+  "max_pointwise_snr": 22316.564453125,
+  "dynamic_range": 11.538936731003533,
+  "worker_process_per_frt_call": true,
+  "memory_at_completion": {
+    "host_total_gib": 14.932,
+    "host_available_gib": 10.965,
+    "host_used_percent": 26.6,
+    "parent_rss_gib": 0.178
+  },
+  "elapsed_seconds_this_run": 1585.2483869999996,
+  "candidate_csv": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/outputs/single_frame_preprocessing/20221026-0057/frt_full_length_empirical_psf_v2/native_threshold_scan_transpose_memdiag_v1/frt_candidates.csv",
+  "state_json": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/outputs/single_frame_preprocessing/20221026-0057/frt_full_length_empirical_psf_v2/native_threshold_scan_transpose_memdiag_v1/scan_state.json",
+  "science_notes": [
+    "Candidate-generation threshold 7.5 is not a false-alarm-calibrated ILMT threshold.",
+    "Pinned PyRaDoN long-mode compatibility patch is applied in each isolated worker.",
+    "The exact Streak model footprint is set to zero in both image and variance, following Nir et al. 2018 Section 4.4, footnote 6.",
+    "clip_mode=pyradon_scalar reproduces the pinned package clipping cap.",
+    "Full-frame mode is retained because sectioning could split the approximately 4553-pixel target."
+  ]
+}

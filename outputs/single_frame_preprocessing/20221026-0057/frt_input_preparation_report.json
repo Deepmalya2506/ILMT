@@ -1,0 +1,54 @@
+{
+  "frame": "20221026-0057.fits",
+  "fits_sha256": "49d29e18f54b729456bd166f7037e551c727d7a32e8cde5530a776527bd38a10",
+  "background_mesh_px": 128,
+  "background_filter_boxes": 3,
+  "background_estimation_mask": {
+    "source_segmentation_included": true,
+    "repeated_value_mask_included": true,
+    "dilation_pixels": 2,
+    "excluded_fraction": 0.06439179182052612,
+    "used_only_for_background_estimation": true
+  },
+  "residual_image": {
+    "shape": [
+      4096,
+      4096
+    ],
+    "dtype": "float32",
+    "finite_fraction": 1.0
+  },
+  "variance_proxy": {
+    "method": "Source-masked SEP local RMS squared",
+    "is_calibrated_total_variance": false,
+    "median_variance": 303.41033935546875,
+    "rms_repair": {
+      "total_pixels": 16777216,
+      "finite_pixels": 16777216,
+      "positive_pixels": 16777216,
+      "zero_pixels": 0,
+      "negative_pixels": 0,
+      "nonfinite_pixels": 0,
+      "invalid_pixels": 0,
+      "invalid_fraction": 0.0,
+      "median_fill_distance_pixels": 0.0,
+      "maximum_fill_distance_pixels": 0.0,
+      "repair_method": "nearest_valid_positive_neighbour"
+    }
+  },
+  "psf": {
+    "shape": [
+      41,
+      41
+    ],
+    "normalisation": 1.0,
+    "measurement": "Global empirical PSF from 128 registered stars"
+  },
+  "target_preservation": {
+    "valid_fraction": 0.9855072463768116,
+    "target_median_contrast": 4.326363980770111,
+    "control_median_contrast": -0.41335131973028183,
+    "paired_difference_median": 4.655031086876988,
+    "fraction_target_above_controls": 0.7308377896613191
+  }
+}

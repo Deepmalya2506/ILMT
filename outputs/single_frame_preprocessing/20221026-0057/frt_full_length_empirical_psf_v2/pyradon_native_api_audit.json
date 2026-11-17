@@ -1,0 +1,78 @@
+{
+  "finder_class": "src.finder.Finder",
+  "find_single_signature": "(im, transpose=False, threshold=None)",
+  "find_multi_signature": "(im, threshold=None, num_iter=None)",
+  "memory": {
+    "process_rss_gib": 2.8889389038085938,
+    "available_ram_gib": 7.288837432861328,
+    "total_ram_gib": 14.932357788085938
+  },
+  "finder_data_state": {
+    "image": {
+      "type": "ndarray",
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "float32",
+      "nbytes_mib": 64.0
+    },
+    "variance": {
+      "type": "ndarray",
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "float32",
+      "nbytes_mib": 64.0
+    },
+    "psf": {
+      "type": "ndarray",
+      "shape": [
+        41,
+        41
+      ],
+      "dtype": "float64",
+      "nbytes_mib": 0.01282501220703125
+    },
+    "radon_image": null,
+    "radon_image_tr": null,
+    "radon_var_maps": null
+  },
+  "streak_class": "src.streak.Streak",
+  "streak_methods": {
+    "calculate": {
+      "signature": "(self)",
+      "source": null
+    },
+    "make_cutout": {
+      "signature": "(self, cut_size=None)",
+      "source": null
+    },
+    "plot_lines": {
+      "signature": "(self, ax=None, offset=10, im_type='section', line_format='--m', linewidth=2.0)",
+      "source": null
+    },
+    "print": {
+      "signature": "(self)",
+      "source": null
+    },
+    "show": {
+      "signature": "(self, ax=None, **kwargs)",
+      "source": null
+    },
+    "subtract_streak": {
+      "signature": "(self, im, replace_value=nan, image_type='subsection')",
+      "source": "    def subtract_streak(self, im, replace_value=np.nan, image_type=\"subsection\"):\n        \"\"\"\n        Replace any pixels touched by this streak with\n        a new value (default is NaN).\n        The pixels \"touched\" are defined by instantiating\n        a streak model with this streak's parameters\n        with some margin given by a few times the\n        width of the PSF.\n        See the documentation for model().\n\n        Parameters\n        ----------\n        im: np.array of floats\n            The image given, will be modified IN PLACE\n            to remove the streak.\n\n        replace_value: float int\n            The value to put instead of the streak pixels.\n            Default is NaN, which lets the finder use\n            background subtraction, no counting this pixels.\n            other popular choices are zero or the b/g mean value.\n\n        image_type: str\n            The type of image to use for the streak model.\n            Can be 'subsection' or 'full' or 'cutout'.\n        \"\"\"\n\n        if image_type == \"subsection\":\n            mask = model(im.shape, self.x1, self.x2, self.y1, self.y2, self.psf_sigma) > 0\n        elif image_type == \"full\":\n            mask = model(im.shape, self.x1f, self.x2f, self.y1f, self.y2f, self.psf_sigma) > 0\n        elif image_type == \"cutout\":\n            mask = model(im.shape, self.x1c, self.x2c, self.y1c, self.y2, self.psf_sigma) > 0\n        else:\n            raise ValueError(f\"image_type {image_type} not recognized... use 'subsection', 'full', or 'cutout'. \")\n\n        im[mask] = replace_value\n"
+    },
+    "update_from_finder": {
+      "signature": "(self, finder)",
+      "source": null
+    },
+    "write_to_disk": {
+      "signature": "(self, filename=None)",
+      "source": null
+    }
+  },
+  "find_multi_source": "    def find_multi(self, im, threshold=None, num_iter=None):\n        \"\"\"\n        Run streak detection on the same image (or subsection)\n        multiple times, for both the transposed and original image.\n        At each iteration, any streaks found are removed from\n        the original image, before calling find_single() again.\n        The original and transposed images each get processed\n        up to \"num_iter\" times. If no streaks are found, the\n        iterations are cut short (but the image is always\n        checked at least twice, for the two transpositions).\n        Streak detection is done on a single threshold value.\n\n        Parameters\n        ----------\n        im: np.ndarray of floats\n            An image (or subset of images) to be scanned\n            for streaks. The image will be modified\n            by removing streaks and adjusting the mean\n            background level.\n        threshold: scalar float\n            The minimal S/N for streaks to be detected in\n            the given image. Defaults to self.pars.threshold (7.5).\n\n        num_iter: scalar int\n            The maximum number of streaks to find in each\n            transposition of the image. When no streaks are\n            found, the number of iterations is smaller.\n            Defaults to self.pars.num_iterations (5).\n\n        Returns\n        -------\n        The image given, after subtracting any found streaks.\n\n        \"\"\"\n        if threshold is None:\n            threshold = self.pars.threshold\n\n        if num_iter is None:\n            num_iter = self.pars.num_iterations\n\n        for trans in [False, True]:\n            for i in range(num_iter):\n                new_streak = self.find_single(im, transpose=trans, threshold=threshold)\n                if not new_streak:\n                    break\n                else:\n                    new_streak.subtract_streak(im)  # remove the streak from input image\n                    if self.pars.use_subtract_mean:\n                        im -= np.nanmean(im)\n\n                    if self.pars.use_show:\n                        new_streak.plot_lines()\n                        plt.show()\n                        # fig = plt.gcf()\n                        # fig.canvas.draw()\n                        # fig.canvas.flush_events()\n        return im\n"
+}

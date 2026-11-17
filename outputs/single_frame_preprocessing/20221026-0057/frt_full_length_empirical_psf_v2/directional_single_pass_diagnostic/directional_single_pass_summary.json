@@ -1,0 +1,41 @@
+{
+  "frame": "20221026-0057.fits",
+  "diagnostic_only": true,
+  "orientation": "transpose=True",
+  "detection_snr_threshold": 7.5,
+  "threshold_units": "normalized Radon S/N",
+  "candidate_found": true,
+  "candidate": {
+    "x1_px": 0.0,
+    "y1_px": -2320.0,
+    "x2_px": 4096.0,
+    "y2_px": 910.9999999999999,
+    "length_px": 5216.950929422281,
+    "image_angle_deg": 38.26702511532172,
+    "angle_difference_from_annotation_deg": 64.44987711532173,
+    "pyradon_snr": 2993.227294921875,
+    "pyradon_snr_fwhm": 113.0096542815701,
+    "pyradon_angle_deg": 38.26702511532172,
+    "intensity_per_length": 2430.220698927248,
+    "total_signal_count": null,
+    "streak_length_px": 5216.950929422281
+  },
+  "runtime_seconds": 6.314112390999981,
+  "memory_before": {
+    "process_rss_gib": 2.9207077026367188,
+    "available_ram_gib": 8.20767593383789,
+    "total_ram_gib": 14.932353973388672,
+    "system_used_percent": 45.0
+  },
+  "memory_after": {
+    "process_rss_gib": 7.618198394775391,
+    "available_ram_gib": 3.4243240356445312,
+    "total_ram_gib": 14.932353973388672,
+    "system_used_percent": 77.1
+  },
+  "reference_annotation": {
+    "image_angle_deg": 153.817148,
+    "centreline_length_px": 4552.85
+  },
+  "interpretation": "One-orientation, one-pass diagnostic only. It does not constitute a blind two-orientation search, a calibrated detection, or a false-alarm controlled result. A brighter instrumental artefact may be returned instead of the annotated diagonal."
+}

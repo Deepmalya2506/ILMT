@@ -1,0 +1,19 @@
+{
+  "frame": "20221026-0057.fits",
+  "mesh_size_px": 128,
+  "mesh_count": 1024,
+  "meshes_masked_ge_50pct": 17,
+  "meshes_masked_ge_90pct": 6,
+  "completely_masked_meshes": 3,
+  "meshes_requiring_sep_nearest_valid_fallback": 17,
+  "target_samples_in_fallback_meshes": 0,
+  "object120_pixels_in_fallback_meshes": 0,
+  "source_A_pixels_in_fallback_meshes": 998,
+  "source_B_pixels_in_fallback_meshes": 58999,
+  "target_background_delta_median": -0.19903521239757538,
+  "target_background_delta_abs_p95": 1.0217210054397583,
+  "target_median_local_rms": 17.313079833984375,
+  "target_background_delta_abs_p95_over_median_rms": 0.059014398604631424,
+  "max_residual_reconstruction_error": 0.0,
+  "max_variance_reconstruction_error": 0.0
+}

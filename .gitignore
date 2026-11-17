@@ -1,2 +1,8 @@
 ILMT_env/
 ILMT_Contest_Materials/
+__pycache__/
+.ipynb_checkpoints/
+*.before_*
+*.log
+*.npy
+*.npz

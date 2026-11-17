@@ -1,0 +1,104 @@
+{
+  "finder_class": "src.finder.Finder",
+  "finder_source_path": "/home/deepmalya/pip_malya/ILMT_Streak_Detection/pyradon_reference/src/finder.py",
+  "methods": {
+    "scan_thresholds": {
+      "callable": true,
+      "signature": "(im, min_threshold=None)",
+      "source": "    def scan_thresholds(self, im, min_threshold=None):\n        \"\"\"\n        Iteratively call find_multi() on several values of\n        the threshold. This enables detection of both\n        bright and faint streaks in the same image.\n        Before running a scan with a given threshold,\n        pixels with point-wise S/N above half the threshold\n        are truncated, leaving only streaks able to pass the\n        threshold because the aggregated S/N of their pixels\n        is generally higher than the S/N of each pixel.\n\n        Any streaks that are found are subtracted inside\n        the find_multi() function.\n\n        Parameters\n        ----------\n        im: np.ndarray of floats\n            An image (or subset of images) to be scanned\n            for streaks. The image will be modified\n            by removing streaks and adjusting the mean\n            background level.\n        min_threshold: scalar float\n            The minimal threshold level to scan.\n            This determines the total number of iterations\n            and also the faintest streaks to be detected.\n            Defaults to self.pars.threshold.\n\n        Returns\n        -------\n        The image is returned after all adjustments\n        and streak subtraction. The input image is\n        modified directly, but returned as a convenience.\n        \"\"\"\n\n        if min_threshold is None:\n            min_threshold = self.pars.threshold\n\n        var_image = self.data.get_var_image(self.data._current_section_corner, im.shape)\n        mx = np.nanmax(im / np.sqrt(var_image))\n\n        dynamic_range = np.log2(mx / min_threshold)\n\n        thresholds = np.flip(min_threshold * 2 ** np.arange(dynamic_range + 1))\n        if self.pars.verbosity > 1:\n            print(f\"mx= {mx:.2f} | dynamic_range= {dynamic_range:.2e} \" f\"| thresholds: {np.round(thresholds, 2)}\")\n\n        for t in thresholds:\n            mask = np.zeros(im.shape, dtype=bool)\n            np.greater(im / np.sqrt(var_image), t / 2, where=np.isnan(im) == 0, out=mask)\n            # clip to threshold (scaled by noise):\n            im[mask] = t / 2 * np.sqrt(self.data.var_scalar)\n            if self.pars.use_subtract_mean:\n                im -= np.nanmean(im)\n\n            if self.pars.use_show:\n                plt.clf()\n                plt.imshow(im)\n                plt.title(f\"section corner: {self.data._current_section_corner}\")\n                plt.xlabel(f\"psf_sigma= {self.data.psf_sigma:.2f} | threshold= {t:.2f}\")\n                plt.show()\n                # f = plt.gcf()\n                # f.canvas.draw()\n                # f.canvas.flush_events()\n\n            im = self.find_multi(im, t)\n\n        return im\n"
+    },
+    "find_multi": {
+      "callable": true,
+      "signature": "(im, threshold=None, num_iter=None)",
+      "source": "    def find_multi(self, im, threshold=None, num_iter=None):\n        \"\"\"\n        Run streak detection on the same image (or subsection)\n        multiple times, for both the transposed and original image.\n        At each iteration, any streaks found are removed from\n        the original image, before calling find_single() again.\n        The original and transposed images each get processed\n        up to \"num_iter\" times. If no streaks are found, the\n        iterations are cut short (but the image is always\n        checked at least twice, for the two transpositions).\n        Streak detection is done on a single threshold value.\n\n        Parameters\n        ----------\n        im: np.ndarray of floats\n            An image (or subset of images) to be scanned\n            for streaks. The image will be modified\n            by removing streaks and adjusting the mean\n            background level.\n        threshold: scalar float\n            The minimal S/N for streaks to be detected in\n            the given image. Defaults to self.pars.threshold (7.5).\n\n        num_iter: scalar int\n            The maximum number of streaks to find in each\n            transposition of the image. When no streaks are\n            found, the number of iterations is smaller.\n            Defaults to self.pars.num_iterations (5).\n\n        Returns\n        -------\n        The image given, after subtracting any found streaks.\n\n        \"\"\"\n        if threshold is None:\n            threshold = self.pars.threshold\n\n        if num_iter is None:\n            num_iter = self.pars.num_iterations\n\n        for trans in [False, True]:\n            for i in range(num_iter):\n                new_streak = self.find_single(im, transpose=trans, threshold=threshold)\n                if not new_streak:\n                    break\n                else:\n                    new_streak.subtract_streak(im)  # remove the streak from input image\n                    if self.pars.use_subtract_mean:\n                        im -= np.nanmean(im)\n\n                    if self.pars.use_show:\n                        new_streak.plot_lines()\n                        plt.show()\n                        # fig = plt.gcf()\n                        # fig.canvas.draw()\n                        # fig.canvas.flush_events()\n        return im\n"
+    },
+    "find_single": {
+      "callable": true,
+      "signature": "(im, transpose=False, threshold=None)",
+      "source": "    def find_single(self, im, transpose=False, threshold=None):\n        \"\"\"\n        Find a single streak in a single image.\n\n        Parameters\n        ----------\n        im: 2D np.ndarray of floats (or None)\n            The image to be scanned for streaks.\n            Should be 2D, with stars and background\n            fully subtracted.\n        transpose: scalar boolean\n            Has this image been transposed.\n            If so, that has some bearing on\n            the output Streak object (e.g.,\n            replacing x->y values).\n            This DOES NOT APPLY A TRANSPOSE\n            on the input image, but assumes\n            it has already been transposed.\n        threshold: scalar float\n            The minimal S/N for finding streaks.\n\n        Returns\n        -------\n        A single Streak object, if found.\n        If no streaks are detected, returns None.\n        If input \"im\" is None, silently returns None.\n        If a streak is detected, it is also added to\n        self.streaks, that can be cleared using\n        self.clear().\n\n        Note on iterations\n        ------------------\n        This can be called multiple times on the same\n        image (or section of the image).\n        Using transpose, and a cascade of different thresholds,\n        and removing each individual streak can allow\n        identification of multiple streaks in the same image.\n        In that case, find_single() will be called many times.\n        Use self.data._num_frt_calls to figure out how many\n        calls to this function were done on the entire image.\n        (this number is set to zero in self.clear()).\n\n        \"\"\"\n        if im is None or len(im) == 0:  # why do we need this short-circuit?\n            return None\n\n        if threshold is None:\n            threshold = self.pars.threshold  # use default\n\n        streak = None\n        self.data._num_frt_calls += 1\n\n        radon_variance_maps = self.data.get_radon_variance(\n            self.data._current_section_corner,\n            im.shape,\n            transpose,\n            self.pars.use_expand,\n        )\n\n        if self.pars.use_short:\n            # these are raw Radon partial transforms:\n            radon_partial = FRT(im, transpose=transpose, partial=True, expand=False)\n\n            # divide by the variance map, geometric factor, and PSF norm for each level\n            # m counts the number of foldings, partials start at 2\n            geometric_factors = [self.get_geometric_factor(m) for m in range(2, len(radon_partial) + 2)]\n\n            psf_factor = self.get_norm_factor_psf()\n\n            # correct the radon images for all these factors\n            for i in range(len(radon_partial)):\n                radon_partial[i] /= np.sqrt(radon_variance_maps[i] * geometric_factors[i] * psf_factor)\n\n            # get the final Radon image as 2D map\n            radon_image = radon_partial[-1][:, 0, :]\n\n            # best index for each folding\n            snrs_idx = [np.nanargmax(r) for r in radon_partial]\n            # snrs_max = np.array([r[i] for i, r in zip(snrs_idx, radon_partial)]) # best S/N for each folding\n            # best S/N for each folding\n            snrs_max = np.array([np.nanmax(r) for r in radon_partial])\n\n            best_idx = np.nanargmax(snrs_max)  # which folding has the best S/N\n            best_snr = snrs_max[best_idx]  # what is the best S/N of all foldings\n\n            if best_snr >= threshold and 2**best_idx >= self.pars.min_length:\n                # the x,y,z of the peak in that subframe:\n                peak_coord = np.unravel_index(snrs_idx[best_idx], radon_partial[best_idx].shape)\n\n                streak = self.make_streak(\n                    snr=best_snr,\n                    transpose=transpose,\n                    threshold=threshold,\n                    peak=peak_coord,\n                    foldings=best_idx + 2,\n                    subframe=radon_partial[best_idx],\n                    section=im,\n                )\n\n        else:  # don't use short streaks\n\n            radon_image = FRT(im, transpose=transpose, partial=False, expand=True)\n\n            # the length tells you how many foldings we need\n            foldings = len(radon_variance_maps) + 1\n\n            # get the last folding and flatten it to 2D\n            radon_variance = radon_variance_maps[-1][:, 0, :]\n            geom_factor = self.get_geometric_factor(foldings)\n            psf_factor = self.get_norm_factor_psf\n\n            radon_image /= np.sqrt(radon_variance * geom_factor * psf_factor)\n\n            # this is how it would look from a partial transpose output\n            radon_partial = radon_image[:, np.newaxis, :]\n\n            idx = np.argmax(radon_image)\n            # idx is a flat index from argmax/nanargmax; use flat indexing so\n            # best_snr is a scalar rather than an entire Radon-map row.\n            best_snr = float(radon_image.flat[idx])\n\n            peak_coord = np.unravel_index(idx, radon_image.shape)\n            # added zero for y start position that is often non-zero in the partial transforms\n            peak_coord = (peak_coord[0], 0, peak_coord[1])\n\n            if best_snr >= threshold:\n                streak = self.make_streak(\n                    snr=best_snr,\n                    transpose=transpose,\n                    threshold=threshold,\n                    peak=peak_coord,\n                    foldings=foldings,\n                    subframe=radon_partial,\n                    section=im,\n                )\n\n        # this will always have the best S/N until \"clear\" is called\n        self.data.best_snr = max(best_snr, self.data.best_snr)\n\n        if streak:\n            self.streaks.append(streak)\n            self.streaks_all.append(streak)\n\n            if self.pars.use_write_cutouts:\n                if self.pars.max_length_to_write is None or streak.L < self.pars.max_length_to_write:\n                    streak.write_to_disk()\n\n        # store the final FRT result\n        # (this is problematic once we start iterating over find_single!)\n        if transpose:\n            self.data.radon_image_tr = radon_image\n        else:\n            self.data.radon_image = radon_image\n\n        if self.pars.verbosity > 1:\n            print(\n                f\"Running FRT {self.data._num_frt_calls} times, \"\n                f\"transpose= {transpose}, thresh= {threshold:.2f}, \"\n                f\"found streak: {bool(streak)}\"\n            )\n\n        return streak\n"
+    },
+    "preprocess": {
+      "callable": true,
+      "signature": "(im)",
+      "source": "    def preprocess(self, im):\n        \"\"\"\n        Run basic processing required before submitting the image\n        into the streak detection code.\n        The two operations are\n        1) background subtraction (by removing the image mean).\n           This only happens if self.pars.use_subtract_mean=True.\n        2) Matched-filter using an estimate of the image PSF.\n           This is done by running a 2D convolution using the PSF\n           image (which defaults to a Gaussian with sigma=2).\n\n        Parameters\n        ----------\n        im: np.ndarray of floats\n            The image to be processed before sending it to\n            the streak detection algorithm.\n\n        Returns\n        -------\n        Another np.ndarray of the same size as \"im\",\n        after background subtraction and PSF filtering.\n\n        \"\"\"\n\n        if self.pars.use_subtract_mean:\n            im = im - np.nanmean(im)  # remove the mean\n        # np.nan_to_num(im, copy=False)\n        # should we also remove cosmic rays/bad pixels at this level?\n\n        im_conv = scipy.signal.convolve2d(im, self.data.psf, mode=\"same\")\n\n        return im_conv\n"
+    },
+    "input": {
+      "callable": true,
+      "signature": "(image, variance=None, psf=None, filename=None, batch_num=None, frame_num=None)",
+      "source": "    def input(\n        self,\n        image,\n        variance=None,\n        psf=None,\n        filename=None,\n        batch_num=None,\n        frame_num=None,\n    ):\n        \"\"\"\n        Input an image and search for streaks in it.\n        This function runs the full suite of processing\n        the Finder object can run, doing all the work\n        to find as many streaks at multiple brightness\n        levels as possible.\n        Ideally, this should be the direct function called\n        by the user.\n\n        Parameters\n        ----------\n        image: np.ndarray\n            The image to be processed.\n        variance: scalar float or 2D np.ndarray of floats\n            An estimate of the noise variance, including\n            noise from the background and const sources.\n            Can be a scalar representing the average noise,\n            or a map of the same size as the input image.\n            If not given, will use the existing variance map\n            (i.e., it can be given once for a series of different\n            images) or use the default in self.pars.default_var_scalar.\n        psf: scalar float or 2D np.ndarray of floats\n            The Point Spread Function of the image (or images).\n            Can give either a scalar (gaussian sigma) or a 2D np.ndarray.\n            The array is usually smaller than the input image.\n        filename: string\n            Used for tracking the origin of any discovered streaks.\n        batch_num: scalar int\n            Used for tracking the origin of any discovered streaks.\n            Useful if we are running many batches in this run.\n        frame_num: scalar int\n            Used for tracking the origin of any discovered streaks.\n            Useful if each batch contains multiple frames/images.\n\n        \"\"\"\n\n        if not isinstance(image, np.ndarray):\n            raise Exception(\"Cannot do streak finding without an image!\")\n\n        self.clear()  # get rid of intermediate results\n\n        self.data.image = image\n\n        # input the variance, if given!\n        if variance:\n            self.data.variance = variance\n\n        # input the PSF if given!\n        if psf:\n            self.data.psf = psf\n\n        # housekeeping\n        self.data.filename = filename\n        self.data.batch_num = batch_num\n        self.data.frame_num = frame_num\n\n        corners = []  # this can be modified by jigsaw()\n\n        if self.pars.use_sections:\n            sections = jigsaw(\n                im=image,\n                cut_size=self.pars.size_sections,\n                trim_corner=self.pars.offset_sections,\n                pad_value=np.nan if self.pars.pad_sections else None,\n                output_corners=corners,\n            )\n        else:\n            sections = np.expand_dims(np.copy(image), 0)\n\n        # go over each section (could be just one) and find streaks\n        for i in range(sections.shape[0]):\n            if corners:\n                self.data._current_section_corner = corners[i]\n            else:\n                self.data._current_section_corner = (0, 0)\n\n            image_sec = sections[i, :, :]\n            image_sec = self.preprocess(image_sec)\n            self.scan_thresholds(image_sec)\n\n        # must return this to zero in case future users\n        # of this object want to use unsectioned images\n        self.data._current_section_corner = (0, 0)\n\n        self.make_image_sub()\n\n        if self.pars.use_show:\n            plt.clf()\n            h = plt.imshow(self.data.image)\n            h.set_clim(0, 5 * np.sqrt(self.data.var_scalar))\n            [streak.plot_lines(im_type=\"full\") for streak in self.streaks]\n            plt.title(\"full frame image\")\n            plt.xlabel(self.data.filename)\n            f = plt.gcf()\n            f.canvas.draw()\n            f.canvas.flush_events()\n"
+    },
+    "clear": {
+      "callable": true,
+      "signature": "()",
+      "source": "    def clear(self):\n        \"\"\"\n        Clears intermediate results.\n        Do this each time you input new images.\n        \"\"\"\n        self.data.image = None\n        self.data.radon_image = None\n        self.data.radon_image_tr = None\n        self.data.best_snr = 0.0\n        self.streaks = []\n\n        self.data.batch_num = 0\n        self.data.frame_num = 0\n        self.data.section_num = 0\n\n        self.data._current_section_corner = (0, 0)\n        self.data._num_frt_calls = 0\n"
+    }
+  },
+  "finder_parameters": {
+    "use_subtract_mean": true,
+    "use_conv": true,
+    "use_sections": false,
+    "size_sections": 1024,
+    "offset_sections": null,
+    "pad_sections": false,
+    "use_short": false,
+    "min_length": 32,
+    "threshold": 5.0,
+    "num_iterations": 3,
+    "use_exclude": false,
+    "exclude_x_pix": {
+      "type": "tuple"
+    },
+    "exclude_y_pix": null,
+    "use_show": false,
+    "use_write_cutouts": false,
+    "max_length_to_write": 128,
+    "default_psf_sigma": 1,
+    "default_var_scalar": 1,
+    "verbosity": 0
+  },
+  "finder_data_buffers": {
+    "image": {
+      "type": "ndarray",
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "float32",
+      "nbytes_mib": 64.0
+    },
+    "variance": {
+      "type": "ndarray",
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "float32",
+      "nbytes_mib": 64.0
+    },
+    "psf": {
+      "type": "ndarray",
+      "shape": [
+        41,
+        41
+      ],
+      "dtype": "float64",
+      "nbytes_mib": 0.01283
+    },
+    "radon_image": null,
+    "radon_image_tr": null,
+    "radon_var_maps": null
+  },
+  "streak_collection": {
+    "exists": true,
+    "container_type": "list",
+    "count": 0,
+    "first_item_type": null
+  },
+  "memory": {
+    "process_rss_gib": 2.8889,
+    "available_ram_gib": 7.2885,
+    "total_ram_gib": 14.9324
+  },
+  "inspection_only": true,
+  "frt_calls_made": 0
+}
